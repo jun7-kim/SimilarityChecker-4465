@@ -37,4 +37,27 @@ public:
 
 		return (int)score;
 	}
+
+	bool isInStr(string str, char ch)
+	{
+		if (str.find(ch) != -1)	return true;
+		return false;
+	}
+
+	const string ALPHABET_PATTERN = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	int getAlphaScore(string str1, string str2)
+	{
+		int totalCnt = 0;
+		int sameCnt = 0;
+		for (char alphabet : ALPHABET_PATTERN)
+		{
+			if (isInStr(str1, alphabet) || isInStr(str2, alphabet)) {
+				totalCnt++;
+			}
+			if (isInStr(str1, alphabet) && isInStr(str2, alphabet)) {
+				sameCnt++;
+			}
+		}
+		return sameCnt * 100 / totalCnt * 40 / 100;
+	}
 };
