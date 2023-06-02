@@ -18,18 +18,7 @@ public:
 
 	int getAlphaScore(string str1, string str2)
 	{
-		int totalCnt = 0;
-		int sameCnt = 0;
-		for (char alphabet : ALPHABET_PATTERN)
-		{
-			if (isInStr(str1, alphabet) || isInStr(str2, alphabet)) {
-				totalCnt++;
-			}
-			if (isInStr(str1, alphabet) && isInStr(str2, alphabet)) {
-				sameCnt++;
-			}
-		}
-		return sameCnt * 100 / totalCnt * 40 / 100;
+		return getSameCount(str1, str2) * 100 / getTotalCount(str1, str2) * 40 / 100;
 	}
 
 private:
@@ -42,6 +31,30 @@ private:
 			return str2Size;
 		}
 		return str1Size;
+	}
+
+	int getTotalCount(string str1, string str2)
+	{
+		int totalCnt = 0;
+		for (char alphabet : ALPHABET_PATTERN)
+		{
+			if (isInStr(str1, alphabet) || isInStr(str2, alphabet)) {
+				totalCnt++;
+			}
+		}
+		return totalCnt;
+	}
+
+	int getSameCount(string str1, string str2)
+	{
+		int sameCnt = 0;
+		for (char alphabet : ALPHABET_PATTERN)
+		{
+			if (isInStr(str1, alphabet) && isInStr(str2, alphabet)) {
+				sameCnt++;
+			}
+		}
+		return sameCnt;
 	}
 
 	int getGap(string str1, string str2)
