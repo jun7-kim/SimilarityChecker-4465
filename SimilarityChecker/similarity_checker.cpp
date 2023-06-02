@@ -16,6 +16,11 @@ public:
 		return (int)score;
 	}
 
+	int getAlphaScore(string str1, string str2)
+	{
+		return getSameCount(str1, str2) * 100 / getTotalCount(str1, str2) * 40 / 100;
+	}
+
 private:
 	int getGapShortLength(string str1, string str2)
 	{
@@ -28,6 +33,30 @@ private:
 		return str1Size;
 	}
 
+	int getTotalCount(string str1, string str2)
+	{
+		int totalCnt = 0;
+		for (char alphabet : ALPHABET_PATTERN)
+		{
+			if (isInStr(str1, alphabet) || isInStr(str2, alphabet)) {
+				totalCnt++;
+			}
+		}
+		return totalCnt;
+	}
+
+	int getSameCount(string str1, string str2)
+	{
+		int sameCnt = 0;
+		for (char alphabet : ALPHABET_PATTERN)
+		{
+			if (isInStr(str1, alphabet) && isInStr(str2, alphabet)) {
+				sameCnt++;
+			}
+		}
+		return sameCnt;
+	}
+
 	int getGap(string str1, string str2)
 	{
 		int str1Size = str1.size();
@@ -38,4 +67,12 @@ private:
 		}
 		return str2Size - str1Size;
 	}
+
+	bool isInStr(string str, char ch)
+	{
+		if (str.find(ch) != -1)	return true;
+		return false;
+	}
+
+	const string ALPHABET_PATTERN = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 };
